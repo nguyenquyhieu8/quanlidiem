@@ -1,0 +1,127 @@
+@extends('admin.block.layout')
+
+@section('content')
+    <div class="container">
+        <h2>Thêm Thí Sinh Mới</h2>
+
+        <form action="{{ route('applicants.store') }}" method="POST">
+            @csrf
+
+            <!-- Tên Thí Sinh -->
+            <div class="form-group">
+                <label for="name">Tên Thí Sinh</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                @error('name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Ngày Sinh -->
+            <div class="form-group">
+                <label for="dob">Ngày Sinh</label>
+                <input type="date" name="dob" id="dob" class="form-control" value="{{ old('dob') }}"
+                    required>
+                @error('dob')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
+                    required>
+                @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Điện Thoại -->
+            <div class="form-group">
+                <label for="phone">Điện Thoại</label>
+                <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}"
+                    required>
+                @error('phone')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Năm Học -->
+            <div class="form-group">
+                <label for="school_year_id">Năm Học</label>
+                <select name="school_year_id" id="school_year_id" class="form-control" required>
+                    <option value="">Chọn Năm Học</option>
+                    @foreach ($schoolYears as $year)
+                        <option value="{{ $year->id }}" {{ old('school_year_id') == $year->id ? 'selected' : '' }}>
+                            {{ $year->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('school_year_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <!-- Khu vực -->
+            <div class="form-group">
+                <label for="province_id">Khu vực</label>
+                <select name="province_id" id="province_id" class="form-control" required>
+                    <option value="">Chọn Khu Vực</option>
+                    @foreach ($province as $region)
+                        <option value="{{ $region->code }}" {{ old('province_id') == $region->code ? 'selected' : '' }}>
+                            {{ $region->full_name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('province_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+            <!-- Ngành Học -->
+            <div class="form-group">
+                <label for="major_id">Ngành Học</label>
+                <select name="major_id" id="major_id" class="form-control" required>
+                    <option value="">Chọn Ngành</option>
+                    @foreach ($majors as $major)
+                        <option value="{{ $major->id }}" {{ old('major_id') == $major->id ? 'selected' : '' }}>
+                            {{ $major->major_name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('major_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Khối Thi -->
+            <div class="form-group">
+                <label for="subject_block_id">Khối Thi</label>
+                <select name="subject_block_id" id="subject_block_id" class="form-control" required>
+                    <option value="">Chọn Khối Thi</option>
+                    @foreach ($subjectBlocks as $block)
+                        <option value="{{ $block->id }}" {{ old('subject_block_id') == $block->id ? 'selected' : '' }}>
+                            {{ $block->block_name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('subject_block_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Điểm -->
+            <div class="form-group">
+                <label for="score">Điểm</label>
+                <input type="number" name="score" id="score" class="form-control" step="0.01" min="0"
+                    max="30" value="{{ old('score') }}" required>
+                @error('score')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Nút Submit -->
+            <button type="submit" class="btn btn-primary">Thêm Thí Sinh</button>
+        </form>
+    </div>
+@endsection
