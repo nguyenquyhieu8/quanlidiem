@@ -20,7 +20,7 @@
                     <a href="{{ route('quantri.admin') }}">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <strong>Quản lí người dùng</strong>
+                    <strong>Quản lí khối(ví dụ khối: A, B, C....)</strong>
                 </li>
             </ol>
         </div>

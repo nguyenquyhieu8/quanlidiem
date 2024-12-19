@@ -1,64 +1,53 @@
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Applicant extends Model
+class CreateApplicantsTable extends Migration
 {
-    use HasFactory;
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('applicants', function (Blueprint $table) {
+            $table->id();
+            $table->string('code')->unique();
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->string('full_name');
+            $table->date('date_of_birth');
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->string('email')->unique();
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
+            $table->string('school_code')->nullable();
+            $table->unsignedBigInteger('major_id');
+            $table->unsignedBigInteger('school_year_id');
+            $table->unsignedBigInteger('subject_block_id');
+            $table->decimal('admission_score', 8, 2)->nullable();
+            $table->string('status')->default('pending');
+            $table->string('application_code')->nullable();
+           
 
-    // Specify the table name if it's not the plural form of the class name
-    protected $table = 'applicants';
+            $table->timestamps();
 
-    // Columns that are mass assignable
-    protected $fillable = [
-        'code',
-        'province_id',
-        'full_name',
-        'date_of_birth',
-        'gender',
-        'email',
-        'phone_number',
-        'address',
-        'school_code',
-        'major_id',
-        'school_year_id',
-        'subject_block_id',
-        'admission_score',
-        'status',
-        'application_code',
-        'registration_date',
-        'priority_area',
-        'priority_group',
-    ];
+            // Foreign key constraints
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
+            $table->foreign('school_year_id')->references('id')->on('school_years')->onDelete('cascade');
+            $table->foreign('subject_block_id')->references('id')->on('subject_blocks')->onDelete('cascade');
+        });
+    }
 
     /**
-     * Define relationships with other models
+     * Reverse the migrations.
+     *
+     * @return void
      */
-
-    // Relationship to Major
-    public function major()
+    public function down()
     {
-        return $this->belongsTo(Major::class, 'major_id', 'id');
-    }
-
-    // Relationship to SchoolYear
-    public function schoolYear()
-    {
-        return $this->belongsTo(SchoolYear::class, 'school_year_id', 'id');
-    }
-
-    // Relationship to SubjectBlock
-    public function subjectBlock()
-    {
-        return $this->belongsTo(SubjectBlock::class, 'subject_block_id', 'id');
-    }
-
-    // Relationship to Province (if you have a Province model)
-    public function province()
-    {
-        return $this->belongsTo(Province::class, 'province_id', 'id');
+        Schema::dropIfExists('applicants');
     }
 }

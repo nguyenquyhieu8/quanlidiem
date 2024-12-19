@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container"  style="background-color: white;padding:50px">
         <h2>Cập nhật Điểm chuẩn - {{ $schoolYear->name }}</h2>
 
         <form action="{{ route('quantri.cutoff_scores.updateByYear', $schoolYear->id) }}" method="POST">

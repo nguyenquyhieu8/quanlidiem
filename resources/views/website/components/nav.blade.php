@@ -15,12 +15,12 @@
                                 class="img-fluid rounded-circle border border-3 border-primary me-2"
                                 style="width: 30px; height: 30px;" alt=""> --}}
 
-                            {{-- @foreach (getActiveNotifications() ?? [] as $index => $notification)
+                            @foreach (getActiveNotifications() ?? [] as $index => $notification)
                                 <div class="notification" id="notification-{{ $index }}" style="display: none;">
-                                    <a href="#" class="text-white mb-0 link-hover">{{ $notification->title }}:
-                                        {{ $notification->content }}</a>
+                                    <a href="#" class="text-white mb-0 link-hover d-flex">{{ $notification->title }}:
+                                        {!!$notification->content !!}</a>
                                 </div>
-                            @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                 </div>

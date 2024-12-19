@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container"  style="background-color: white;padding:50px">
         <h2>Danh sách Năm học</h2>
         <a href="{{ route('quantri.cutoff_scores.create') }}">
             <button type="button" class="btn btn-primary mb-3">Thêm điểm chuẩn</button>

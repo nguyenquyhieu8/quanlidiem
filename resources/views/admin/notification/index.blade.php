@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content mb-2">
-                        <a href="{{ route('noti.create') }}">
+                        <a href="{{ route('quantri.noti.create') }}">
                             <button type="button" class="btn btn-primary mb-3">Thêm thông báo</button>
                         </a>
 
@@ -46,6 +46,7 @@
                                         <th>Nội dung</th>
                                         <th>Ngày phát hành</th>
                                         <th>Ngày hết hạn</th>
+                                        <th>Người dùng</th>
                                         <th>Hình ảnh</th>
                                         <th>Video</th>
                                         <th>Hành động</th>
@@ -59,6 +60,11 @@
                                             <td>{{ $notification->content }}</td>
                                             <td>{{ $notification->publish_date }}</td>
                                             <td>{{ $notification->expiry_date }}</td>
+                                            <td>
+                                                @if ($notification->type == 1)
+                                                    <span class="badge bg-success">Hiển thị công khai</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if ($notification->image)
                                                     <img src="{{ asset('storage') }}/{{ $notification->image }}"
@@ -77,11 +83,11 @@
                                             </td>
                                             <td>
                                                 <!-- Edit Button -->
-                                                <a href="{{ route('noti.edit', $notification->id) }}"
+                                                <a href="{{ route('quantri.noti.edit', $notification->id) }}"
                                                     class="btn btn-warning btn-sm">Sửa</a>
 
                                                 <!-- Delete Button -->
-                                                <form action="{{ route('noti.destroy', $notification->id) }}"
+                                                <form action="{{ route('quantri.noti.destroy', $notification->id) }}"
                                                     method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

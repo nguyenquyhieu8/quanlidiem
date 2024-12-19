@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5"  style="background-color: white;padding:50px">
         <h2>Edit Block</h2>
 
         @if (session('success'))

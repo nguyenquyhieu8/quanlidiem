@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container"  style="background-color: white;padding:50px">
         <h2>Thêm Điểm Chuẩn</h2>
         @if (session('existing_records'))
             <div class="alert alert-warning">

@@ -29,7 +29,25 @@
 
     @yield('content')
 
+    <div class="chat-box">
+        <div class="chat-box-header">
+            ChatBot
+            <span class="chat-box-toggle"><i class="far fa-window-close"></i></span>
+        </div>
+        <div class="chat-box-body">
+            <div class="chat-box-overlay">
+            </div>
+            <div class="chat-logs">
 
+            </div><!--chat-log -->
+        </div>
+        <div class="chat-input">
+            <form>
+                <input type="text" id="chat-input" placeholder="Send a message..." />
+                <button type="button" class="chat-submit" id="chat-submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
     <!-- Footer Start -->
     <div class="container-fluid bg-dark footer py-5">
         <div class="container py-5">
@@ -121,13 +139,17 @@
                             Sports</a>
                         <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
                             Magazine</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
+                        <a class="btn-link text-white" href=""><i
+                                class="fas fa-angle-right text-white me-2"></i>
                             Lifestyle</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
+                        <a class="btn-link text-white" href=""><i
+                                class="fas fa-angle-right text-white me-2"></i>
                             Politician</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
+                        <a class="btn-link text-white" href=""><i
+                                class="fas fa-angle-right text-white me-2"></i>
                             Technology</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
+                        <a class="btn-link text-white" href=""><i
+                                class="fas fa-angle-right text-white me-2"></i>
                             Intertainment</a>
                     </div>
                 </div>

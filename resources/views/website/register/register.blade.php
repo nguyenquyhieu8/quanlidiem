@@ -70,6 +70,7 @@
         .wizard .nav-tabs .nav-item .nav-link svg {
             font-size: 25px;
         }
+
         /* General Wizard Style */
         .wizard {
             background-color: #f9f9f9;
@@ -187,7 +188,6 @@
             margin-top: 20px;
         }
     </style>
-
 @endsection
 @section('content')
     <div class="container">
@@ -198,7 +198,7 @@
             <p class="text-muted">Hãy đảm bảo cung cấp thông tin liên lạc chính xác để chúng tôi có thể hỗ trợ bạn khi cần
                 thiết.</p>
         </div>
-        <form action="/submit" method="POST">
+        <form action="{{ route('trangchu.registerFormPost') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="wizard my-5">
                 <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -243,9 +243,9 @@
                         <div class="form-group">
                             <label for="gender">Gender</label>
                             <select id="gender" name="gender" class="form-control" required>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -271,8 +271,9 @@
                         <h3>Step 2: Academic Information</h3>
                         <div class="form-group">
                             <label for="school_code">School Code</label>
-                            <input type="text" id="school_code" name="school_code" class="form-control" required>
+                            <input type="text" id="school_code" name="school_code" class="form-control">
                         </div>
+
                         <div class="form-group">
                             <label for="major_id">Major</label>
                             <select id="major_id" name="major_id" class="form-control" required>
@@ -297,6 +298,10 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="admission_score">Điểm xét tuyển</label>
+                            <input type="text" id="admission_score" name="admission_score" class="form-control">
+                        </div>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-secondary previous"><i class="fas fa-angle-left"></i>
                                 Back</button>
@@ -309,6 +314,7 @@
                     <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
                         <h3>Step 3: Confirmation</h3>
                         <p>Review your details and submit your application.</p>
+
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-secondary previous"><i class="fas fa-angle-left"></i>
                                 Back</button>
@@ -319,6 +325,7 @@
                 </div>
             </div>
         </form>
+
     </div>
 @endsection
 @section('scripts')

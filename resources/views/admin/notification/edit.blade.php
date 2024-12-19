@@ -28,19 +28,20 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                        <form action="{{ route('noti.update', $notification->id) }}" method="POST"
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('quantri.noti.update', $notification->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT') <!-- Sử dụng phương thức PUT cho việc cập nhật -->
@@ -105,6 +106,7 @@
 
                             <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>
+
                     </div>
                 </div>
             </div>

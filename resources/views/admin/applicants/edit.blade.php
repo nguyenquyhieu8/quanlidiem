@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container"  style="background-color: white;padding:50px">
         <h2>Cập nhật Thông Tin Thí Sinh</h2>
 
         <form action="{{ route('quantri.applicants.update', $applicant->id) }}" method="POST">

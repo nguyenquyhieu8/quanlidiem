@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Major;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Applicant;
 use App\Models\SchoolYear;
 use App\Models\NewsArticle;
 use App\Models\SubjectBlock;
@@ -113,6 +114,41 @@ class HomeController extends Controller
         return view('website.register.register', compact('subjectBlocks', 'schoolYears', 'majors'));
     }
 
+
+    public function registerFormPost(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'gender' => 'required|in:male,female,other',
+            'email' => 'required|email|unique:applicants,email',
+            'phone_number' => 'required|string|max:15',
+            'school_code' => 'nullable|string|max:255',
+            'major_id' => 'required|exists:majors,id',
+            'school_year_id' => 'required|exists:school_years,id',
+            'subject_block_id' => 'required|exists:subject_blocks,id',
+        ]);
+
+        Applicant::create([
+            'full_name' => $request->full_name,
+            'code' => strtoupper(substr(md5(rand()), 0, 7)),
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'school_code' => $request->school_code,
+            'major_id' => $request->major_id,
+            'school_year_id' => $request->school_year_id,
+            'subject_block_id' => $request->subject_block_id,
+            'admission_score' => $request->admission_score,
+        ]);
+
+        return redirect()->back()->with("success", "Đăng kí tuyển sinh thành công");
+    }
+public function getContact() {
+    return view("website.form.contact");
+}
     /**
      * Store a newly created resource in storage.
      */

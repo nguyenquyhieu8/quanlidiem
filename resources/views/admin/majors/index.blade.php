@@ -6,7 +6,7 @@
         }
 
         .action {
-            display: flex; 
+            display: flex;
             gap: 10px;
         }
     </style>
@@ -20,7 +20,7 @@
                     <a href="{{ route('quantri.admin') }}">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <strong>Quản lí người dùng</strong>
+                    <strong>Quản lí ngành học</strong>
                 </li>
             </ol>
         </div>

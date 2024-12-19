@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="background-color: white;padding:50px">
         <h2>Danh sách Thí sinh Tuyển sinh</h2>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -23,15 +23,15 @@
                     @forelse ($applicants as $key => $applicant)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $applicant->name }}</td>
+                            <td>{{ $applicant->full_name }}</td>
                             <td>{{ $applicant->code }}</td>
-                            <td>{{ $applicant->dob }}</td>
+                            <td>{{ $applicant->date_of_birth }}</td>
                             <td>{{ $applicant->email }}</td>
-                            <td>{{ $applicant->phone }}</td>
-                            <td>{{ $applicant->schoolYear->name }}</td>
+                            <td>{{ $applicant->phone_number }}</td>
+                            <td>{{ $applicant->schoolYear->school_year_range }}</td>
                             <td>{{ $applicant->major->major_name }}</td>
                             <td>{{ $applicant->subjectBlock->block_name }}</td>
-                            <td>{{ $applicant->score }}</td>
+                            <td>{{ $applicant->admission_score }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -40,6 +40,7 @@
                     @endforelse
                 </tbody>
             </table>
+
             {{ $applicants->links() }}
         </div>
     </div>

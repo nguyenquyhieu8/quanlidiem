@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-    <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="row wrapper border-bottom white-bg page-heading"  style="background-color: white;padding:50px">
         <div class="col-lg-10">
             <h2>Quản lí điểm chuẩn - {{ $schoolYear->name }}</h2>
             <ol class="breadcrumb">

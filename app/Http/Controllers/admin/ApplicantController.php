@@ -14,14 +14,12 @@ use App\Http\Controllers\Controller;
 
 class ApplicantController extends Controller
 {
-    public function SearchResult()
+    public function index()
     {
-        $schoolYears = SchoolYear::all();
-        $majors = Major::all();
-        $subjectBlocks = SubjectBlock::all();
-        $province = Province::all();
-        return view("admin.applicants.search", compact("schoolYears", "majors", "subjectBlocks", "province"));
+        $applicants = Applicant::with(['major', 'schoolYear', 'subjectBlock', 'province'])->paginate(20);
+        return view('admin.applicants.index', compact('applicants'));
     }
+
     public function getSearchResult(Request $request)
     {
         // Validate input
@@ -47,13 +45,6 @@ class ApplicantController extends Controller
         ]);
     }
 
-
-    public function index()
-    {
-        // Lấy danh sách thí sinh và phân trang
-        $applicants = Applicant::with(['schoolYear', 'major', 'subjectBlock'])->paginate(20);
-        return view('admin.applicants.index', compact('applicants'));
-    }
 
     public function create()
     {
@@ -131,17 +122,15 @@ class ApplicantController extends Controller
     {
         // Lấy danh sách các thí sinh có điểm >= điểm chuẩn
         $applicants = Applicant::with(['major', 'subjectBlock', 'schoolYear'])
-            ->whereHas('major', function ($query) {
-                $query->whereHas('cutoffScores', function ($query) {
-                    $query->whereColumn('applicants.major_id', 'cutoff_scores.major_id')
-                        ->whereColumn('applicants.subject_block_id', 'cutoff_scores.subject_block_id')
-                        ->whereColumn('applicants.school_year_id', 'cutoff_scores.school_year_id')
-                        ->whereRaw('applicants.score >= cutoff_scores.score');
-                });
+            ->whereHas('major.cutoffScores', function ($query) {
+                $query->whereColumn('applicants.major_id', 'cutoff_scores.major_id')
+                    ->whereColumn('applicants.subject_block_id', 'cutoff_scores.subject_block_id')
+                    ->whereColumn('applicants.school_year_id', 'cutoff_scores.school_year_id')
+                    ->whereRaw('applicants.admission_score >= cutoff_scores.score');
             })
             ->paginate(20);
-
         return view('admin.applicants.CutoffScores', compact('applicants'));
     }
+
 
 }

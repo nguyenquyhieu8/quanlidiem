@@ -1,7 +1,7 @@
 @extends('admin.block.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container"  style="background-color: white;padding:50px">
         <h2>Thêm Thí Sinh Mới</h2>
 
         <form action="{{ route('applicants.store') }}" method="POST">

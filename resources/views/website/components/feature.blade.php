@@ -85,3 +85,9 @@
         </div>
     </div>
 </div>
+<div id="chat-circle" class="btn btn-raised">
+    <div id="chat-overlay"></div>
+    <i class="fab fa-rocketchat"></i>
+</div>
+
+

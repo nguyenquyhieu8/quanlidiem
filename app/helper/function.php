@@ -1,10 +1,9 @@
 <?php
 use Carbon\Carbon;
-use App\Models\Material;
+use App\Models\Notification;
 function getActiveNotifications()
 {
     $notifications = Notification::where('expiry_date', '>', Carbon::now())
-        ->where('type', 0)
         ->get();
     return $notifications;
 }

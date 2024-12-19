@@ -11,13 +11,13 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Thêm người dùng</h2>
+            <h2>Thêm thông báo</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ route('quantri.admin') }}">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <strong>Thêm người dùng</strong>
+                    <strong>Thêm thông báo</strong>
                 </li>
             </ol>
         </div>
@@ -27,15 +27,27 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
+                        @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <form action="{{ route('noti.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <label for="title" class="form-label">Tiêu đề</label>
                                     <input type="text" id="title" name="title" class="form-control" required>
                                 </div>
-                        
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <label for="content" class="form-label">Nội dung</label>
                                     <textarea id="content" name="content" class="form-control" rows="3" required></textarea>
                                 </div>
@@ -58,16 +70,6 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="video" class="form-label">Video</label>
                                     <input type="file" id="video" name="video" class="form-control" accept="video/*">
-                                </div>
-                        
-                                <div class="col-md-6 mb-3">
-                                    <label for="user_id" class="form-label">Người dùng</label>
-                                    <select id="user_id" name="user_id" class="form-select">
-                                        <option value="" selected>Không chọn người dùng</option> <!-- Cập nhật để cho phép không chọn -->
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                         

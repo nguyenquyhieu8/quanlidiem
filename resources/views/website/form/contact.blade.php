@@ -6,10 +6,10 @@
                 <div class="row g-4">
                     <div class="col-lg-5">
                         <div class="">
-                            <h1 class="mb-4">General Customer Care &amp; Technical Support</h1>
-                            <p class="mb-4">The contact form is currently inactive. Get a functional and working contact
-                                form with Ajax &amp; PHP in a few minutes. Just copy and paste the files, add a little code
-                                and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                            <h1 class="mb-4">Đại học Vinh, hướng tới tương lai</h1>
+                            <p class="mb-4">
+                                tọa lạc tại thành phố Vinh, trung tâm của tỉnh Nghệ An.
+                                Trường đại học này nằm trong một khu vực nổi tiếng với di sản văn hóa phong phú và ý nghĩa lịch sử, khiến nơi đây trở thành một nơi đầy cảm hứng cho việc học tập và nghiên cứu. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
                             <div class="rounded">
                                 <iframe class="rounded w-100" style="height: 425px;"
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1694259649153!5m2!1sen!2sbd"

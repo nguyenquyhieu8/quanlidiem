@@ -18,32 +18,14 @@ class InfomationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Notification::with('user'); // Eager load citizen relationship
-
-        if ($request->has('search')) {
-            $searchTerm = $request->search;
-
-            // Tìm kiếm theo lý do, địa điểm hoặc thông tin người dùng
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('reason', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('destination', 'like', '%' . $searchTerm . '%')
-                    ->orWhereHas('user', function ($q) use ($searchTerm) {
-                        $q->where('name', 'like', '%' . $searchTerm . '%') // Tìm theo tên
-                            ->orWhere('email', 'like', '%' . $searchTerm . '%') // Tìm theo email
-                            ->orWhere('phone', 'like', '%' . $searchTerm . '%'); // Tìm theo số điện thoại
-                    });
-            });
-        }
-
-        $noti = $query->paginate(10); // Paginate results
-        return view('backend.info.index', compact('noti'));
+        $noti = Notification::paginate(10);
+        return view('admin.info.index', compact('noti'));
     }
     public function create()
     {
-        $users = User::all();
 
         // Return the create view with the users and citizens
-        return view('backend.info.create', compact('users'));
+        return view('admin.info.create');
     }
 
     /**
@@ -57,18 +39,13 @@ class InfomationController extends Controller
             'content' => 'required|string',
             'publish_date' => 'required|date',
             'expiry_date' => 'required|date|after_or_equal:publish_date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Tối đa 2MB
-            'video' => 'nullable|mimetypes:video/mp4,video/x-msvideo,video/x-matroska|max:20000', // Tối đa 20MB
         ]);
 
-        // Khởi tạo một đối tượng Notification mới
         $notification = new Notification();
         $notification->title = $request->title;
         $notification->content = $request->content;
         $notification->publish_date = $request->publish_date;
         $notification->expiry_date = $request->expiry_date;
-        $notification->user_id = $request->user_id;
-        $notification->type = $request->user_id == "" ? 1 : 0;
 
         // Xử lý tệp hình ảnh
         if ($request->hasFile('image')) {
