@@ -1,15 +1,16 @@
 <?php
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\admin\YearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\YearController;
 use App\Http\Controllers\admin\MajorsController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\admin\ProvinceController;
 use App\Http\Controllers\Admin\ApplicantController;
+use App\Http\Controllers\Admin\InfomationController;
 use App\Http\Controllers\admin\CutoffScoresController;
 use App\Http\Controllers\admin\SubjectBlocksController;
 
@@ -62,6 +63,6 @@ Route::get('/trang-chu', [\App\Http\Controllers\website\HomeController::class, "
 Route::get('/gioi-thieu', [\App\Http\Controllers\website\HomeController::class, "introduce"])->name("trangchu.introduce");
 Route::get('/dang-ki', [\App\Http\Controllers\website\HomeController::class, "registerForm"])->name("trangchu.register");
 Route::get('/trang-chu/{slug}', [\App\Http\Controllers\website\HomeController::class, "postsDetail"])->name("trangchu.postsDetail");
-
+Route::resource('/noti', InfomationController::class);
 
 require __DIR__ . '/auth.php';

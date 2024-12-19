@@ -1,38 +1,64 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-class CreateApplicantsTable extends Migration
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Applicant extends Model
 {
-    public function up()
-    {
-        Schema::create('applicants', function (Blueprint $table) {
-            $table->id(); // Auto-increment ID
-            $table->string("code", 10);
-            $table->integer('province_id');
+    use HasFactory;
 
-            $table->string('full_name', 100); // Full name
-            $table->date('date_of_birth'); // Date of birth
-            $table->enum('gender', ['Male', 'Female', 'Other']); // Gender
-            $table->string('email', 100)->unique(); // Email (unique)
-            $table->string('phone_number', 15)->unique(); // Phone number
-            $table->string('address', 255)->nullable(); // Address
-            $table->string('school_code', 10); // School code
-            $table->integer('major_id', 10)->nullable(); // Major code
-            $table->float('admission_score')->nullable(); // Admission score
-            $table->enum('status', ['Pending', 'Approved', 'Completed'])->default('Pending'); // Status
-            $table->string('application_code', 20)->nullable(); // Application code
-            $table->timestamp('registration_date')->useCurrent(); // Registration date
-            $table->string('priority_area', 20)->nullable(); // Priority area
-            $table->string('priority_group', 20)->nullable(); // Priority group
-            $table->timestamps(); // Auto timestamps (created_at, updated_at)
-        });
+    // Specify the table name if it's not the plural form of the class name
+    protected $table = 'applicants';
+
+    // Columns that are mass assignable
+    protected $fillable = [
+        'code',
+        'province_id',
+        'full_name',
+        'date_of_birth',
+        'gender',
+        'email',
+        'phone_number',
+        'address',
+        'school_code',
+        'major_id',
+        'school_year_id',
+        'subject_block_id',
+        'admission_score',
+        'status',
+        'application_code',
+        'registration_date',
+        'priority_area',
+        'priority_group',
+    ];
+
+    /**
+     * Define relationships with other models
+     */
+
+    // Relationship to Major
+    public function major()
+    {
+        return $this->belongsTo(Major::class, 'major_id', 'id');
     }
 
-    public function down()
+    // Relationship to SchoolYear
+    public function schoolYear()
     {
-        Schema::dropIfExists('applicants');
+        return $this->belongsTo(SchoolYear::class, 'school_year_id', 'id');
+    }
+
+    // Relationship to SubjectBlock
+    public function subjectBlock()
+    {
+        return $this->belongsTo(SubjectBlock::class, 'subject_block_id', 'id');
+    }
+
+    // Relationship to Province (if you have a Province model)
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id', 'id');
     }
 }

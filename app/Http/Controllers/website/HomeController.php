@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\website;
 
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\NewsArticle;
 use App\Models\Post;
+use App\Models\Major;
+use App\Models\Comment;
+use App\Models\Category;
+use App\Models\SchoolYear;
+use App\Models\NewsArticle;
+use App\Models\SubjectBlock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -101,7 +104,13 @@ class HomeController extends Controller
     }
     public function registerForm()
     {
-        return view('website.register.register');
+        // Lấy tất cả các SubjectBlock, SchoolYear, và Major
+        $subjectBlocks = SubjectBlock::all();
+        $schoolYears = SchoolYear::all();
+        $majors = Major::all();
+
+        // Truyền dữ liệu sang view
+        return view('website.register.register', compact('subjectBlocks', 'schoolYears', 'majors'));
     }
 
     /**

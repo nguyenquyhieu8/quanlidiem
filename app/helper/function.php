@@ -1,6 +1,13 @@
 <?php
+use Carbon\Carbon;
 use App\Models\Material;
-
+function getActiveNotifications()
+{
+    $notifications = Notification::where('expiry_date', '>', Carbon::now())
+        ->where('type', 0)
+        ->get();
+    return $notifications;
+}
 function getCategories($categories, $old = '', $parentId = 0, $char = '')
 {
     $id = request()->route()->category;
