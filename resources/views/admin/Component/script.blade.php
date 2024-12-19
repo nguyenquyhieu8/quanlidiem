@@ -1,4 +1,5 @@
 <script src="{{ asset('backend') }}/js/bootstrap.min.js"></script>
+<script src="{{ asset('backend') }}/js/jquery-3.1.1.min.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/flot/jquery.flot.js"></script>
@@ -16,9 +17,6 @@
 <script src="{{ asset('backend') }}/js/demo/sparkline-demo.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/chartJs/Chart.min.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/toastr/toastr.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-
 @yield('script')
 <script>
     CKEDITOR.replace('content', {
