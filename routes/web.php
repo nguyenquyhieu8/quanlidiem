@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\admin\YearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
@@ -29,6 +31,8 @@ Route::name('quantri.')->middleware('role.access', 'auth')->group(function () {
     Route::resource('subject_blocks', SubjectBlocksController::class);
     Route::resource('majors', MajorsController::class);
     Route::resource('years', YearController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('posts', PostController::class);
     Route::get('cutoff_scores/years', [CutoffScoresController::class, 'yearIndex'])->name('cutoff_scores.years');
     Route::get('cutoff_scores/year/{yearId}', [CutoffScoresController::class, 'showByYear'])->name('cutoff_scores.showByYear');
     Route::get('cutoff_scores/editByYear/{yearId}', [CutoffScoresController::class, 'editByYear'])->name('cutoff_scores.editByYear');
@@ -55,6 +59,9 @@ Route::post('/contact/{code}', [ContactController::class, 'send'])->name('contac
 
 
 Route::get('/trang-chu', [\App\Http\Controllers\website\HomeController::class, "index"])->name("trangchu.index");
+Route::get('/gioi-thieu', [\App\Http\Controllers\website\HomeController::class, "introduce"])->name("trangchu.introduce");
+Route::get('/dang-ki', [\App\Http\Controllers\website\HomeController::class, "registerForm"])->name("trangchu.register");
+Route::get('/trang-chu/{slug}', [\App\Http\Controllers\website\HomeController::class, "postsDetail"])->name("trangchu.postsDetail");
 
 
 require __DIR__ . '/auth.php';

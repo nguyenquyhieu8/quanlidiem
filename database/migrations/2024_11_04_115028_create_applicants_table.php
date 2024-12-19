@@ -9,17 +9,25 @@ class CreateApplicantsTable extends Migration
     public function up()
     {
         Schema::create('applicants', function (Blueprint $table) {
-            $table->id();
-            $table->string('name'); // Tên thí sinh
-            $table->date('dob'); // Ngày sinh
-            $table->string('email')->unique(); // Email của thí sinh
-            $table->string('phone')->unique(); // Số điện thoại
-            $table->foreignId('school_year_id')->constrained('school_years')->onDelete('cascade'); // Năm học
-            $table->foreignId('major_id')->constrained('majors')->onDelete('cascade'); // Ngành học
-            $table->foreignId('subject_block_id')->constrained('subject_blocks')->onDelete('cascade'); // Khối thi
+            $table->id(); // Auto-increment ID
+            $table->string("code", 10);
+            $table->integer('province_id');
 
-            $table->decimal('score', 5, 2); // Điểm xét tuyển của thí sinh
-            $table->timestamps();
+            $table->string('full_name', 100); // Full name
+            $table->date('date_of_birth'); // Date of birth
+            $table->enum('gender', ['Male', 'Female', 'Other']); // Gender
+            $table->string('email', 100)->unique(); // Email (unique)
+            $table->string('phone_number', 15)->unique(); // Phone number
+            $table->string('address', 255)->nullable(); // Address
+            $table->string('school_code', 10); // School code
+            $table->integer('major_id', 10)->nullable(); // Major code
+            $table->float('admission_score')->nullable(); // Admission score
+            $table->enum('status', ['Pending', 'Approved', 'Completed'])->default('Pending'); // Status
+            $table->string('application_code', 20)->nullable(); // Application code
+            $table->timestamp('registration_date')->useCurrent(); // Registration date
+            $table->string('priority_area', 20)->nullable(); // Priority area
+            $table->string('priority_group', 20)->nullable(); // Priority group
+            $table->timestamps(); // Auto timestamps (created_at, updated_at)
         });
     }
 

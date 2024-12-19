@@ -5,6 +5,7 @@ namespace App\Http\Controllers\website;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\NewsArticle;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,16 +16,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view("website.index");
+        $categories = Category::with("posts")->paginate(5);
+        $rssFeedUrl = "https://vnexpress.net/rss/giao-duc.rss";
+        $rssContent = simplexml_load_file($rssFeedUrl);
+
+        // Chuyển đổi nội dung RSS thành mảng để sử dụng trong view
+        $rssArticles = [];
+        foreach ($rssContent->channel->item as $item) {
+            $rssArticles[] = [
+                'title' => (string) $item->title,
+                'link' => (string) $item->link,
+                'description' => (string) $item->description,
+                'published_at' => (string) $item->pubDate,
+                'image' => (string) $item->enclosure['url'] ?? '',
+                'slug' => isset($item->slug) ? (string) $item->slug : '',
+            ];
+        }
+        return view("website.index", compact("categories", "rssArticles"));
     }
 
     public function postsDetail($slug)
     {
-        // Lấy bài viết chi tiết
-        $postslide = NewsArticle::where("slug", $slug)->firstOrFail();
-        $comments = $postslide->comments()->orderBy('created_at', 'desc')->where("publish", 1)->get();
-        // Lấy 3 bài viết liên quan
-        $relatedPosts = NewsArticle::where('category_id', $postslide->category_id)
+        $postslide = Post::where("slug", $slug)->firstOrFail();
+        $relatedPosts = Post::where('category_id', $postslide->category_id)
             ->where('slug', '!=', $slug)
             ->take(3)
             ->get();
@@ -47,32 +61,47 @@ class HomeController extends Controller
         }
 
         // Trả dữ liệu ra view
-        return view("website.posts.detail", compact("postslide", "relatedPosts", "rssArticles", "comments"));
+        return view("website.posts.detail", compact("postslide", "relatedPosts", "rssArticles"));
     }
 
 
     /**
      * Show the form for creating a new resource.
      */
-    public function postComment(Request $request)
+    public function introduce(Request $request)
     {
+        $introduct = Post::where("title", "giới thiệu")->first();
 
-        // Validate dữ liệu đầu vào
-        $request->validate([
-            'username' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'content' => 'required|string|max:5000',
-        ]);
+        $rssFeedUrl = "https://giaoducthoidai.vn/rss/tuyen-sinh-du-hoc-26.rss";
+        $rssContent = simplexml_load_file($rssFeedUrl);
 
-        $comment = new Comment();
-        $comment->post_id = $request->post_id;
-        $comment->author_name = $request->username;
-        $comment->author_email = $request->email;
-        $comment->content = $request->content;
-        $comment->save();
+        // Chuyển đổi nội dung RSS thành mảng để sử dụng trong view
+        $rssArticles = [];
+        foreach ($rssContent->channel->item as $item) {
+            // Lấy hình ảnh từ thẻ <image> hoặc <description>
+            $image = (string) $item->image ?? '';
+            if (empty($image)) {
+                preg_match('/<img src="([^"]+)"/', (string) $item->description, $matches);
+                $image = $matches[1] ?? '';
+            }
 
-        // Chuyển hướng hoặc trả thông báo thành công
-        return redirect()->back()->with('success', 'Comment has been posted successfully!');
+            // Làm sạch mô tả
+            $description = strip_tags((string) $item->description, '<p><br>');
+
+            $rssArticles[] = [
+                'title' => (string) $item->title,
+                'link' => (string) $item->link,
+                'description' => $description,
+                'published_at' => (string) $item->pubDate,
+                'image' => $image,
+            ];
+        }
+
+        return view("website.posts.detail", compact("rssArticles", "introduct"));
+    }
+    public function registerForm()
+    {
+        return view('website.register.register');
     }
 
     /**

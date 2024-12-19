@@ -9,26 +9,55 @@
             <ol class="breadcrumb justify-content-start mb-4">
                 <li class="breadcrumb-item"><a href="/trang-chu">trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="#">bài viết</a></li>
-                <li class="breadcrumb-item active text-dark">{{ $introduct->title }}</li>
+                <li class="breadcrumb-item active text-dark">{{ $postslide->title }}</li>
             </ol>
             <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="mb-4">
-                        <a href="#" class="h1 display-5">{{ $introduct->title }}</a>
+                        <a href="#" class="h1 display-5">{{ $postslide->title }}</a>
                     </div>
                     <div class="position-relative rounded overflow-hidden mb-3">
+                        <img src="{{ asset('storage') }}/{{ $postslide->image }}" class="img-zoomin img-fluid rounded w-100"
+                            alt="{{ $postslide->title }}">
+                        <div class="position-absolute text-white px-4 py-2 bg-primary" style="top: 20px; right: 20px;">
+                            {{ $postslide->category->name }}
+                        </div>
                     </div>
                     {{-- <div class="d-flex justify-content-between">
                         <a href="#" class="text-dark link-hover me-3"><i class="fa fa-clock"></i>
-                            {{ \Carbon\Carbon::parse($introduct->published_at)->diffInMinutes() }} minute read</a>
+                            {{ \Carbon\Carbon::parse($postslide->published_at)->diffInMinutes() }} minute read</a>
                         <a href="#" class="text-dark link-hover me-3"><i class="fa fa-eye"></i>
-                            {{ $introduct->views }} Views</a>
+                            {{ $postslide->views }} Views</a>
                         <a href="#" class="text-dark link-hover me-3"><i class="fa fa-comment-dots"></i>
-                            {{ $introduct->comments_count }} Comment</a>
+                            {{ $postslide->comments_count }} Comment</a>
                         <a href="#" class="text-dark link-hover"><i class="fa fa-arrow-up"></i>
-                            {{ $introduct->shares }} Share</a>
+                            {{ $postslide->shares }} Share</a>
                     </div> --}}
-                    <p class="my-4">{!! $introduct->content !!}</p>
+                    <p class="my-4">{!! $postslide->content !!}</p>
+
+                    @if ($relatedPosts->count() > 0)
+                        <div class="bg-light rounded my-4 p-4">
+                            <h4 class="mb-4">Bài viết liên quan</h4>
+                            <div class="row g-4">
+                                @foreach ($relatedPosts as $relatedPost)
+                                    <!-- Giả định bạn có các bài viết liên quan -->
+                                    <div class="col-lg-12">
+                                        <div class="d-flex bg-white rounded">
+                                            <img src="{{ asset('storage') }}/{{ $relatedPost->image }}"
+                                                class="img-fluid rounded col-lg-5" alt="{{ $relatedPost->title }}">
+                                            <div class="ms-3">
+                                                <a href="{{ route('post.detail', $relatedPost->slug) }}"
+                                                    class="h5 mb-2">{{ $relatedPost->title }}</a>
+                                                <p class="text-dark mt-3 mb-0 me-3"><i class="fa fa-clock"></i>
+                                                    {{ \Carbon\Carbon::parse($relatedPost->published_at)->diffInMinutes() }}
+                                                    minute read</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-4">
                     <div class="row g-4">

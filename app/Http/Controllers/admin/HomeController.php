@@ -12,7 +12,12 @@ class HomeController extends Controller
         if (Auth::check()) {
             return view('admin.index');
         }
-        return view('trangchu.index');
+
+        auth()->logout();
+
+        // Xóa tất cả session
+        session()->flush();
+        return view('website.index');
     }
 
 }

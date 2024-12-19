@@ -26,6 +26,7 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('website') }}/css/style.css" rel="stylesheet">
+    @yield('style')
     <style>
         #center-text {
             display: flex;

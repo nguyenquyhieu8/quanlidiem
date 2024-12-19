@@ -11,5 +11,7 @@
     <link href="{{ asset('backend') }}/css/animate.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/css/style.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/css/main.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
+
     @yield('style')
 </head>

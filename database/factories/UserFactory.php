@@ -27,7 +27,6 @@ class UserFactory extends Factory
             'role_id' => rand(1,2),
             'is_active' => 1,
             'position' => "quản trị",
-            'province_id' => Province::inRandomOrder()->value('code'),
         ];
     }
 }

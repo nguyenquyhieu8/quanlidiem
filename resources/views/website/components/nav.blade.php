@@ -44,10 +44,17 @@
     <div class="container-fluid bg-light">
         <div class="container px-0">
             <nav class="navbar navbar-light navbar-expand-xl">
-                <a href="/" class="navbar-brand mt-3">
-                    <p class="text-primary display-6 mb-2" style="line-height: 0;">Đăng kí công dân</p>
-                    <small class="text-body fw-normal" style="letter-spacing: 12px;">Đăng kí công dân</small>
-                </a>
+                <div class="col-12 col-sm-1 col-lg-6 col-xl-66 col-xxl-6 d-flex align-items-center">
+                    <div id="logo">
+                        <a href="/trang-chu" class="d-block">
+                            <img src="{{ asset('website') }}/img/vu-logo.png" alt="Vinh University" width="90px"
+                                height="90px">
+                        </a>
+                    </div>
+                    <div class="name-uni ms-2 ps-2 vu_d-md-none">
+                        <span>TRƯỜNG ĐẠI HỌC VINH <br> VINH UNIVERSITY</span>
+                    </div>
+                </div>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars text-primary"></span>
@@ -55,21 +62,22 @@
                 <div class="collapse navbar-collapse bg-light py-3" id="navbarCollapse">
                     <div class="navbar-nav mx-auto border-top">
                         <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-                        <a href="detail-page.html" class="nav-item nav-link">Bài viết</a>
-                        <a href="404.html" class="nav-item nav-link">Giới thiệu</a>
+                        {{-- <a href="detail-page.html" class="nav-item nav-link">Bài viết</a> --}}
+                        <a href="/gioi-thieu" class="nav-item nav-link">Giới thiệu</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Đăng kí</a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                {{-- <a href="/birth-registrations" class="dropdown-item">Đăng kí khai sinh</a>
-                                <a href="/citizens" class="dropdown-item">Đăng kí công dân</a>
-                                <a href="{{ route('absence') }}" class="dropdown-item">Đăng kí tạm vắng</a>
-                                <a href="{{ route('temp-residence') }}" class="dropdown-item">Đăng kí tạm trú</a>
-                                <a href="{{ route('death') }}" class="dropdown-item">Đăng kí khai tử</a> --}}
+                                <a href="/dang-ki" class="dropdown-item">Đăng kí tuyển sinh</a>
                             </div>
                         </div>
                         <a href="/contact" class="nav-item nav-link">Liên hệ</a>
+                        @if (!Auth::check())
+                            <a href="/login" class="nav-item nav-link">Đăng nhập</a>
+                        @endif
+
                     </div>
                     <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0" style="column-gap: 20px">
+
                         {{-- <div class="dropdown">
                             <button
                                 class="btn-search btn border border-primary btn-md-square rounded-circle bg-white my-auto dropdown-toggle"
@@ -97,23 +105,7 @@
                             class="btn-search btn border border-primary btn-md-square rounded-circle bg-white my-auto"
                             data-bs-toggle="modal" data-bs-target="#searchModal"><i
                                 class="fas fa-search text-primary"></i></button>
-                        <ul class="dropdown-menu dropdown-user animated fadeIn">
-                            <i class="fas fa-user text-primary"></i>
-                            <div class="dropdown-user-scroll scrollbar-outer">
-                                <li>
-                                    <div class="user-box">
-                                        <div class="u-text">
-                                            <h4>{{ Auth::guard('admin')->user()->username }}</h4>
-                                            <p class="text-muted">{{ Auth::guard('admin')->user()->email }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
-                                </li>
-                            </div>
-                        </ul> --}}
+                        
                         {{-- <button
                             class="btn-search btn border border-primary btn-md-square rounded-circle bg-white my-auto"
                             data-bs-toggle="modal" data-bs-target="#searchModal"><i

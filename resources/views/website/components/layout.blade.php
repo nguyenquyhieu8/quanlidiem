@@ -187,7 +187,7 @@
     <script src="{{ asset('website') }}/lib/easing/easing.min.js"></script>
     <script src="{{ asset('website') }}/lib/waypoints/waypoints.min.js"></script>
     <script src="{{ asset('website') }}/lib/owlcarousel/owl.carousel.min.js"></script>
-
+    @yield('scripts');
     <!-- Template Javascript -->
     <script src="{{ asset('website') }}/js/main.js"></script>
     <script>

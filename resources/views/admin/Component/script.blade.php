@@ -18,3 +18,11 @@
 <script src="{{ asset('backend') }}/js/plugins/chartJs/Chart.min.js"></script>
 <script src="{{ asset('backend') }}/js/plugins/toastr/toastr.min.js"></script>
 @yield('script')
+<script>
+    CKEDITOR.replace('content', {
+        // Các cấu hình bổ sung nếu cần:
+        filebrowserBrowseUrl: '/browser/browse.php',
+        filebrowserUploadUrl: '/uploader/upload.php',
+        height: 300,
+    });
+</script>
