@@ -28,12 +28,10 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:2048',
-            'category_id' => 'required|exists:categories,id',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']); // Tạo slug từ title
         $validated['is_published'] = $request->has('is_published'); // Lấy giá trị is_published
-
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('posts', 'public'); // Lưu ảnh vào thư mục public/posts
         }
@@ -54,7 +52,6 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|max:2048',
-            'category_id' => 'required|exists:categories,id',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']); // Tạo slug từ title
