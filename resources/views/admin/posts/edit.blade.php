@@ -61,7 +61,6 @@
                                 <div class="col-sm-10">
                                     <select class="form-control @error('category_id') is-invalid @enderror"
                                         name="category_id">
-                                        <option value="9999">Chọn danh mục</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
                                                 {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>

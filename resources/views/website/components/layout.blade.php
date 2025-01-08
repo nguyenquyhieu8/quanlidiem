@@ -268,10 +268,7 @@
                     name: 'Trợ giúp',
                     value: 'help'
                 },
-                {
-                    name: 'Giới thiệu về sản phẩm',
-                    value: 'product'
-                },
+              
                 {
                     name: 'Liên hệ chúng tôi',
                     value: 'contact'
@@ -284,30 +281,29 @@
 
             // Mảng các câu trả lời tương ứng
             var responseMessages = {
-                help: [
-                    "Chúng tôi luôn sẵn sàng giúp bạn! Hãy mô tả vấn đề bạn gặp phải.",
-                    "Bạn cần trợ giúp về vấn đề gì? Hãy cung cấp thông tin chi tiết nhé!",
-                    "Chào bạn! Vui lòng mô tả khó khăn của bạn để chúng tôi hỗ trợ."
-                ],
-                product: [
-                    "Sản phẩm của chúng tôi mang lại giá trị tuyệt vời! Bạn có muốn biết thêm chi tiết không?",
-                    "Chúng tôi cung cấp các sản phẩm chất lượng cao, phù hợp với nhu cầu của bạn.",
-                    "Bạn quan tâm đến sản phẩm nào? Chúng tôi sẽ gửi thông tin cụ thể."
-                ],
-                contact: [
-                    "Bạn có thể liên hệ chúng tôi qua hotline: 1800-123-456.",
-                    "Vui lòng gửi email đến support@company.com để được hỗ trợ.",
-                    "Chúng tôi sẵn sàng hỗ trợ bạn qua trang liên hệ trên website chính thức."
-                ],
-                register: [
-                    "Vui lòng chọn một trong các biểu mẫu dưới đây để đăng ký:",
-                    "<a href='/birth-registrations' target='_blank'>Đăng kí khai sinh</a>",
-                    "<a href='/citizens' target='_blank'>Đăng kí công dân</a>",
-                    "<a href='/absence' target='_blank'>Đăng kí tạm vắng</a>",
-                    "<a href='/temp-residence' target='_blank'>Đăng kí tạm trú</a>",
-                    "<a href='/death' target='_blank'>Đăng kí khai tử</a>"
-                ]
-            };
+            help: [
+                "Chúng tôi luôn sẵn sàng hỗ trợ bạn về vấn đề tuyển sinh! Hãy mô tả thắc mắc của bạn.",
+                "Bạn cần trợ giúp về quy trình tuyển sinh? Hãy cung cấp thông tin chi tiết nhé!",
+                "Chào bạn! Vui lòng cho chúng tôi biết bạn gặp phải khó khăn ở bước nào trong quá trình đăng ký tuyển sinh."
+            ],
+            product: [
+                // Phần này không còn sử dụng nữa, vì không liên quan đến tuyển sinh
+            ],
+            contact: [
+                "Bạn có thể liên hệ với chúng tôi qua hotline: 1800-123-456 để được tư vấn tuyển sinh.",
+                "Vui lòng gửi email đến admissions@university.com để nhận thông tin tuyển sinh chi tiết.",
+                "Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn qua trang liên hệ trên website tuyển sinh chính thức."
+            ],
+            register: [
+                "Chào bạn! Nếu bạn đang quan tâm đến việc tuyển sinh, vui lòng chọn một trong các tùy chọn dưới đây để biết thêm thông tin:",
+                "<a href='/gioi-thieu' target='_blank'>Gioi thieu Thông tin tuyển sinh năm 2025</a>",
+                "<a href='/dang-ki' target='_blank'>Đăng kí tuyển sinh</a>",
+                "<a href='/contact' target='_blank'>Liên hệ với chúng tôi</a>",
+                // "<a href='/admission-requirements' target='_blank'>Yêu cầu và thủ tục đăng ký tuyển sinh</a>",
+                "Nếu bạn cần hỗ trợ về việc hoàn thiện hồ sơ tuyển sinh, đừng ngần ngại liên hệ với chúng tôi!"
+            ]
+        };
+
 
             // Khi nhấn vào chat-circle
             $("#chat-circle").click(function() {
